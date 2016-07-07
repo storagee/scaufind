@@ -32,7 +32,10 @@ var postSchema = new mongoose.Schema({
         type: Date,
         "default": Date.now
     },
-    finished: Boolean,
+    finished: {
+        type: Boolean,
+        "default": false
+    },
     userId: {
         type: mongoose.Schema.ObjectId,
         ref: 'User'
