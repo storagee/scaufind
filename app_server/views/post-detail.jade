@@ -1,0 +1,27 @@
+extends layout
+
+block content
+    .container.mainContainer.post-detail-page
+        .panel.panel-default
+            .panel-heading
+                h3 又丢了又丢了，这是标题
+                h6 发布于 2016-07-03 阅读 (123) | 评论 (123)
+            .list-group
+                a.list-group-item(href='#')
+                    p 我的校园卡在从图书馆去西园的路上丢了，快要准备去吃饭了，吐吐槽，等一下就去西园
+                    p.text-right
+                        | 2016-07-03 11:30
+            .panel-heading
+                h3 评论区
+            .list-group
+                a.list-group-item(href='#')
+                    h5 from张三
+                    p 嘿嘿，在我这
+                    p.text-right
+                        | 2016-07-03 11:33
+                .list-group-item
+                    form(action='#', role='form')
+                        h4 说点什么吧
+                        .form-group
+                            textarea.form-control(path='content', placeholder='请输入评论', rows='6')
+                        input.btn.btn-primary(type='submit', value='发表评论')

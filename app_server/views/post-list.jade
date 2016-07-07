@@ -1,0 +1,39 @@
+extends layout
+
+block content
+    .container.main-container.post-list-page
+        .panel.panel-default.side-newest-panel
+            .panel-heading
+                h3.panel-title 启事列表
+            .list-group
+                a.list-group-item(href='#')
+                    h4.list-group-item-heading
+                        | 标题1
+                    p 详情详情详情，丢了丢了丢了，怎么办
+                    p.text-right
+                        | 2016-07-03 11:04
+                a.list-group-item(href='#')
+                    h4.list-group-item-heading
+                        | 标题2
+                    p 详情详情详情，丢了丢了丢了，怎么办
+                    p.text-right
+                        | 2016-07-03 11:04
+                .list-group-item
+                    nav
+                        ul.pagination
+                            li
+                                a(href='#', aria-label='Previous')
+                                    span(aria-hidden='true') «
+                            li
+                                a(href='#') 1
+                            li
+                                a(href='#') 2
+                            li
+                                a(href='#') 3
+                            li
+                                a(href='#') 4
+                            li
+                                a(href='#') 5
+                            li
+                                a(href='#', aria-label='Next')
+                                    span(aria-hidden='true') »
