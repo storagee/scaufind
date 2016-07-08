@@ -1,0 +1,40 @@
+extends layout
+
+block content
+    .mainContainer.profile-page
+        .row
+            .col-md-8.col-md-offset-2
+                .panel.panel-default
+                    .panel-heading
+                        h3.panel-title 赖智辉 - 个人资料
+                    .panel-body
+                        form(action='#', method='POST', role='form')
+                            .form-group
+                                img.thumbnail.avatar-big.portrait(src='images/portrait.png', alt='avatar')
+                                label.control-label 选择头像
+                                input.form-control(name='avatar', type='file')
+                            .form-group
+                                label.control-label 用户名
+                                input.form-control(type='email')
+                            .form-group
+                                label.control-label 出生年月(yyyy/mm)
+                                input.form-control(type='text')
+                            .form-group
+                                label.control-label 性别
+                                .form-control
+                                    label.radio-inline
+                                        input.radio-inline(type='radio', value='M')
+                                        |  男
+                                    label.radio-inline
+                                        input.radio-inline(type='radio', value='F')
+                                        |  女
+                            .form-group
+                                label.control-label 手机号码
+                                input.form-control(type='text')
+                            .form-group
+                                label.control-label QQ 号码
+                                input.form-control(type='text')
+                            .form-group
+                                label.control-label 微信号码
+                                input.form-control(type='text')
+                            input.btn.btn-primary(type='submit', value='保存修改')
