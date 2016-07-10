@@ -1,0 +1,41 @@
+extends layout
+
+block content
+    .index-page
+        .jumbotron
+            .container
+                h1 在这里, 找回你所失去的
+                p
+                    | This is a simple hero unit, a simple jumbotron-style component for
+                    | calling extra attention to featured content or information.
+        .container
+            .row
+                .col-xs-12.col-sm-6.col-md-6
+                    panel.panel-default
+                        .panel-heading
+                            h3.panel-title 失物启事
+                        .list-group
+                            if losts.length > 0
+                                each lost in losts
+                                    a.list-group-item(href="http://localhost:3000/post-detail?userId=#{lost._id}")
+                                        .list-group-item-heading
+                                            | #{lost.title}
+                                        p
+                                            | #{lost.detail}
+                                        p.text-right
+                                            | #{lost.created}
+                .col-xs-12.col-sm-6.col-md-6
+                    panel.panel-default
+                        .panel-heading
+                            h3.panel-title 招领启事
+                        .list-group
+                            if founds.length > 0
+                                each found in founds
+                                    a.list-group-item(href="http://localhost:3000/post-detail?userId=#{found._id}")
+                                        .list-group-item-heading
+                                            | #{found.title}
+                                        p
+                                            | #{found.detail}
+                                        p.text-right
+                                            | #{found.created}
+

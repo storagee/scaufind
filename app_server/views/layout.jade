@@ -1,0 +1,19 @@
+doctype html
+html
+    head
+        meta(name='viewport' content='width=device-width, initial-scale=1.0')
+        title= title
+        link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+        link(rel='stylesheet', href='/stylesheets/css/scau-find.css')
+    body
+        .sticky-footer-wrap
+            include ./includes/header
+            block content
+        include ./includes/footer
+        script(src='/javascripts/jquery-1.11.3.min.js')
+        script(src='/javascripts/bootstrap.min.js')
+        script(src='/javascripts/test.js')
+        script(src='/javascripts/userCreate.js')
+        script(src='/javascripts/categoryCreate.js')
+        script(src='/javascripts/postCreate.js')
+        script(src='/javascripts/scaufind.js')
