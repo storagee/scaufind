@@ -4,13 +4,13 @@ block content
     .container.mainContainer.post-detail-page
         .panel.panel-default
             .panel-heading
-                h3 又丢了又丢了，这是标题
-                h6 发布于 2016-07-03 阅读 (123) | 评论 (123)
+                h3 #{post.title}
+                h6 由 #{post.userId.userName != undefined? post.userId.userName:''} #{post.userId.email} 发布
             .list-group
                 a.list-group-item(href='#')
-                    p 我的校园卡在从图书馆去西园的路上丢了，快要准备去吃饭了，吐吐槽，等一下就去西园
+                    p #{post.detail}
                     p.text-right
-                        | 2016-07-03 11:30
+                        | #{post.created}
             .panel-heading
                 h3 评论区
             .list-group

@@ -1,8 +1,15 @@
 var mongoose = require('mongoose');
 
 var userSchema = new mongoose.Schema({
-    email: String,
-    password: String,
+    email: {
+        type: String,
+        require: true,
+        unique: true
+    },
+    password: {
+        type: String,
+        require: true
+    },
     userName: String,
     mobile: Number,
     qq: Number,
@@ -14,11 +21,17 @@ var userSchema = new mongoose.Schema({
 });
 
 var categorySchema = new mongoose.Schema({
-    name: String
+    name: {
+        type: String,
+        require: true
+    }
 });
 
 var postSchema = new mongoose.Schema({
-    title: String,
+    title: {
+        type: String,
+        require: true
+    },
     type: {
         type: 'String',
         enum: ['lost', 'found']
@@ -37,32 +50,40 @@ var postSchema = new mongoose.Schema({
         "default": false
     },
     userId: {
-        type: mongoose.Schema.ObjectId,
-        ref: 'User'
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        require: true
     },
     categoryId: {
-        type: mongoose.Schema.ObjectId,
-        ref: 'Category'
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Category',
+        require: true
     }
 });
 
 var commentSchema = new mongoose.Schema({
-    content: String,
+    content: {
+        type: String,
+        require: true
+    },
     parentId: {
-        type: mongoose.Schema.ObjectId,
-        ref: 'Comment'
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Comment',
+        require: true
     },
     created: {
         type: Date,
         "default": Date.now
     },
     postId: {
-        type: mongoose.Schema.ObjectId,
-        ref: 'Post'
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Post',
+        require: true
     },
     userId: {
-        type: mongoose.Schema.ObjectId,
-        ref: 'User'
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        require: true
     }
 });
 
@@ -73,7 +94,7 @@ var announcementSchema = new mongoose.Schema({
     },
     content: String,
     userId: {
-        type: mongoose.Schema.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     }
 });

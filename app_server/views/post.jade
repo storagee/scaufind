@@ -6,7 +6,8 @@ block content
         .panel.panel-default
             .panel-heading 发布招领启事
             .panel-body
-                form(action='#', method='POST')
+                form(action='#{submitUrl}', method='POST')
+                    input(type='hidden', value='#{userId}', name='userId' id='user-id')
                     // beg of form
                     .form-group
                         label(for='title') 请输入标题
@@ -18,12 +19,14 @@ block content
                         label.control-label 启事类别
                         .form-control
                             label.radio-inline
-                                input.radio-inline(type='radio', name='lost-or-found')
+                                input.radio-inline(type='radio', name='type', id='lost', value='lost')
                                 |  找东西
                             label.radio-inline
-                                input.radio-inline(type='radio', name='lost-or-found')
+                                input.radio-inline(type='radio', name='type', id='found', value='found')
                                 |  找失主
                     .form-group
-                        label(for='type') 物品类别
-                        select.form-control(name='', id='')
+                        label(for='options') 物品类别
+                        select.form-control(name='category', id='options')
+                            each option in options
+                                option(value='#{option._id}') #{option.name}
                     input.btn.btn-primary(type='submit', value='发布')

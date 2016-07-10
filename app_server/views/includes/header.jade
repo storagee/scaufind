@@ -10,33 +10,35 @@ nav.navbar.navbar-default.navbar-fixed-top.header
         #site-navbar-collapsed-content.collapse.navbar-collapse
             ul.nav.navbar-nav
                 li
-                    a(href='http://localhost:3000/post-list') 招领启事
+                    a(href='http://localhost:3000/post-list?type=found') 招领启事
                 li
-                    a(href='http://localhost:3000/post-list') 寻物启事
+                    a(href='http://localhost:3000/post-list?type=lost') 寻物启事
                 li
                     a(href='#') 网站公告
                 li
                     a(href='#') 关于我们
-            ul.nav.navbar-nav.navbar-right
-                li
-                    a(href='http://localhost:3000/sign-in') 登陆
-                li
-                    a(href='http://localhost:3000/sign-up') 注册
-            ul.nav.navbar-nav.navbar-right
-                li
-                    a(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
-                        | 欢迎您
-                        span.caret
-                    ul.dropdown-menu
-                        li
-                            a(href='http://localhost:3000/post') 我要发帖
-                        li.divider(role='separator')
-                        li
-                            a(href='http://localhost:3000/profile') 我的资料
-                        li.divider(role='separator')
-                        li
-                            a(href='#')
-                                | 未读消息
-                                span.badge 42
-                li
-                    a(href='#') 安全退出
+            if user == undefined
+                ul.nav.navbar-nav.navbar-right
+                    li
+                        a(href='http://localhost:3000/sign-in') 登陆
+                    li
+                        a(href='http://localhost:3000/sign-up') 注册
+            if user != undefined
+                ul.nav.navbar-nav.navbar-right
+                    li
+                        a(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
+                            | 欢迎您 #{user.username? user.username : user.email}
+                            span.caret
+                        ul.dropdown-menu
+                            li
+                                a(href='http://localhost:3000/post') 我要发帖
+                            li.divider(role='separator')
+                            li
+                                a(href='http://localhost:3000/profile') 我的资料
+                            li.divider(role='separator')
+                            li
+                                a(href='#')
+                                    | 未读消息
+                                    span.badge 42
+                    li
+                        a(href='http://localhost:3000/logout') 安全退出

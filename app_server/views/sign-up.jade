@@ -2,7 +2,7 @@ extends layout
 
 block content
     .container.sign-up-page
-        form(action='#', method='post', class='form-signinup')
+        form(action='#{submitUrl}', method='post', class='form-signinup')
             fieldset
                 .row
                     .col-md-8.col-md-offset-4.col-lg-8.col-lg-offset-4.col-xs-8.col-xs-offset-4
@@ -13,21 +13,21 @@ block content
                             .input-group
                                 label.input-group-addon(for='email')
                                     i.glyphicon.glyphicon-user
-                                input.form-control(path='email', placeholder='邮箱地址', type='email')
-                .form-group
-                    .row
-                        .col-md-4.col-md-offset-4.col-lg-4.col-lg-offset-4.col-xs-4.col-xs-offset-1
-                            .input-group
-                                input.form-control(path='verifyCode', placeholder='验证码', type='text')
-                                span.input-group-btn
-                                    #sendButton.btn.btn-default.btn-primary 发送验证码
+                                input.form-control(path='email', name='email', placeholder='邮箱地址', type='email')
+                //.form-group
+                //    .row
+                //        .col-md-4.col-md-offset-4.col-lg-4.col-lg-offset-4.col-xs-4.col-xs-offset-1
+                //            .input-group
+                //                input.form-control(path='verifyCode', placeholder='验证码', type='text')
+                //                span.input-group-btn
+                //                    #sendButton.btn.btn-default.btn-primary 发送验证码
                 .form-group
                     .row
                         .col-md-4.col-md-offset-4.col-lg-4.col-lg-offset-4.col-xs-10.col-xs-offset-1
                             .input-group
                                 label.input-group-addon(for='password')
                                     i.glyphicon.glyphicon-lock
-                                input.form-control(path='password', placeholder='登陆密码', type='password')
+                                input.form-control(path='password', name='password', placeholder='登陆密码', type='password')
                 .form-group
                     .row
                         .col-md-4.col-md-offset-4.col-lg-4.col-lg-offset-4.col-xs-10.col-xs-offset-1
@@ -38,5 +38,10 @@ block content
                 .row
                     .col-md-4.col-md-offset-4.col-lg-4.col-lg-offset-4.col-xs-10.col-xs-offset-1
                         button.btn.btn-lg.btn-primary.btn-block(type='submit') 马上注册
+                if message != undefined
+                    .row
+                        .col-md-4.col-md-offset-4.col-lg-4.col-lg-offset-4.col-xs-10.col-xs-offset-1
+                            .alert.alert-danger #{message}
+
         script(type='text/javascript').
             document.getElementById('email').focus();

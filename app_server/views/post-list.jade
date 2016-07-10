@@ -6,18 +6,13 @@ block content
             .panel-heading
                 h3.panel-title 启事列表
             .list-group
-                a.list-group-item(href='#')
-                    h4.list-group-item-heading
-                        | 标题1
-                    p 详情详情详情，丢了丢了丢了，怎么办
-                    p.text-right
-                        | 2016-07-03 11:04
-                a.list-group-item(href='#')
-                    h4.list-group-item-heading
-                        | 标题2
-                    p 详情详情详情，丢了丢了丢了，怎么办
-                    p.text-right
-                        | 2016-07-03 11:04
+                each post in posts
+                    a.list-group-item(href='localhost:3000/post-detail?userId=#{post._id}')
+                        h4.list-group-item-heading
+                            | #{post.title}
+                        p #{post.detail}
+                        p.text-right
+                            | #{post.updated}
                 .list-group-item
                     nav
                         ul.pagination
