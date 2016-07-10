@@ -15,6 +15,8 @@ router.get('/post-list', ctrlMain.postList);
 router.get('/post-detail', ctrlMain.postDetail);
 //查看用户信息
 router.get('/profile', ctrlMain.profile);
+//发布评论
+router.post('/comment', ctrlMain.addComment);
 
 //注册页
 router.get('/sign-up', ctrlMain.signUp);

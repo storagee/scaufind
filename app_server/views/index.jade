@@ -5,9 +5,9 @@ block content
         .jumbotron
             .container
                 h1 在这里, 找回你所失去的
-                p
-                    | This is a simple hero unit, a simple jumbotron-style component for
-                    | calling extra attention to featured content or information.
+                p(style='text-align: center')
+                    | This's a lost and found platform of SCAU,
+                    | hope you can find your lost things or help others to find.
         .container
             .row
                 .col-xs-12.col-sm-6.col-md-6
@@ -17,7 +17,7 @@ block content
                         .list-group
                             if losts.length > 0
                                 each lost in losts
-                                    a.list-group-item(href="http://localhost:3000/post-detail?userId=#{lost._id}")
+                                    a.list-group-item.lost-found-wrap(href="http://localhost:3000/post-detail?userId=#{lost._id}")
                                         .list-group-item-heading
                                             | #{lost.title}
                                         p
@@ -31,7 +31,7 @@ block content
                         .list-group
                             if founds.length > 0
                                 each found in founds
-                                    a.list-group-item(href="http://localhost:3000/post-detail?userId=#{found._id}")
+                                    a.list-group-item.lost-found-wrap(href="http://localhost:3000/post-detail?userId=#{found._id}")
                                         .list-group-item-heading
                                             | #{found.title}
                                         p

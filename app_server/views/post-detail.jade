@@ -1,3 +1,4 @@
+
 extends layout
 
 block content
@@ -13,15 +14,17 @@ block content
                         | #{post.created}
             .panel-heading
                 h3 评论区
-            .list-group
-                a.list-group-item(href='#')
-                    h5 from张三
-                    p 嘿嘿，在我这
-                    p.text-right
-                        | 2016-07-03 11:33
-                .list-group-item
+            .list-group#comment-wrap
+                each comment in post.comment
+                    a.list-group-item(href='#')
+                        h5 from #{comment.userId != null ? (comment.userId.userName != undefined? comment.userId.userName + ' ' + comment.userId.email:comment.userId.email) : ''}
+                        p #{comment.content}
+                        p.text-right
+                            | #{comment.created}
+                .list-group-item#comment-bottom
                     form(action='#', role='form')
                         h4 说点什么吧
                         .form-group
-                            textarea.form-control(path='content', placeholder='请输入评论', rows='6')
-                        input.btn.btn-primary(type='submit', value='发表评论')
+                            textarea.form-control#comment-area(path='content', placeholder='请输入评论', rows='6')
+                        input#submit-post-id(type='hidden', value='#{post._id}')
+                        input.btn.btn-primary#submit-comment(type='button', value='发表评论')

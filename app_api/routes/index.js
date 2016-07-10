@@ -22,4 +22,7 @@ router.get('/getUserByEmail', UserController.getUserByEmail);
 router.post('/addCategores', CategoryController.addCategores);
 router.get('/getCategories', CategoryController.getCategoryList);
 
+//评论
+router.post('/addComment', PostController.addComment);
+
 module.exports = router;

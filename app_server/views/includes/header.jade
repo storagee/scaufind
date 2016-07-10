@@ -27,8 +27,9 @@ nav.navbar.navbar-default.navbar-fixed-top.header
                 ul.nav.navbar-nav.navbar-right
                     li
                         a(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
-                            | 欢迎您 #{user.username? user.username : user.email}
+                            | 欢迎您 #{user.userName? user.userName + ' ' + user.email : user.email}
                             span.caret
+                            input#user-info(type='hidden' data-user-info='#{user.userName? user.userName + " " + user.email : user.email}')
                         ul.dropdown-menu
                             li
                                 a(href='http://localhost:3000/post') 我要发帖

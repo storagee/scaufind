@@ -30,9 +30,3 @@ process.on('SIGINT', function() {
         process.exit(0);
     });
 });
-// For Heroku app termination
-process.on('SIGTERM', function() {
-    gracefulShutdown('Heroku app shutdown', function () {
-        process.exit(0);
-    });
-});

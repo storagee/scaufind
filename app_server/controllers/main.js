@@ -35,7 +35,7 @@ module.exports.index = function (req, res) {
     };
     request(requestOptions, function (error, response, body) {
         if (response.statusCode === 200) {
-            console.log(body);
+            // console.log(body);
             var data = {
                 losts: [],
                 founds: [],
@@ -48,7 +48,7 @@ module.exports.index = function (req, res) {
                     data.founds.push(item);
                 }
             });
-            console.log('ready to render, data is: ', data);
+            // console.log('ready to render, data is: ', data);
             res.render('index', data);
         } else {
             _showError(req, res, response.statusCode);
@@ -58,7 +58,7 @@ module.exports.index = function (req, res) {
 
 module.exports.post = function (req, res) {
     var user = req.session.user;
-    if(user){
+    if (user) {
         var requestOptions = {
             url: options.apiPath + 'getCategories',
             method: "GET",
@@ -66,7 +66,7 @@ module.exports.post = function (req, res) {
         };
         request(requestOptions, function (error, response, body) {
             if (response.statusCode === 200) {
-                console.log(body);
+                // console.log(body);
                 res.render('post', {
                     options: body,
                     userId: user._id,
@@ -77,7 +77,7 @@ module.exports.post = function (req, res) {
                 _showError(req, res, response.statusCode);
             }
         })
-    }else{
+    } else {
         res.redirect(options.loginPath);
     }
 };
@@ -88,10 +88,10 @@ module.exports.addPost = function (req, res) {
         method: "POST",
         json: req.body
     };
-    console.log(req.body);
+    // console.log(req.body);
     request(requestOptions, function (error, response, body) {
         if (response.statusCode == 201) {
-            console.log(body);
+            // console.log(body);
             res.redirect(options.homePath);
         } else {
             _showError(req, res, response.statusCode);
@@ -109,7 +109,7 @@ module.exports.postList = function (req, res) {
         requestOptions.json.type = 'lost';
         request(requestOptions, function (error, response, body) {
             if (response.statusCode === 200) {
-                console.log('type = lost :::::::::::::::::::::::', body);
+                // console.log('type = lost :::::::::::::::::::::::', body);
                 res.render('post-list', {
                     posts: body,
                     user: req.session.user
@@ -122,7 +122,7 @@ module.exports.postList = function (req, res) {
         requestOptions.json.type = 'found';
         request(requestOptions, function (error, response, body) {
             if (response.statusCode === 200) {
-                console.log('type = found :::::::::::::::::::::::', body);
+                // console.log('type = found :::::::::::::::::::::::', body);
                 res.render('post-list', {
                     posts: body,
                     user: req.session.user
@@ -138,6 +138,7 @@ module.exports.postList = function (req, res) {
 };
 
 module.exports.signIn = function (req, res) {
+    console.log('req.session.message: ------------------------------', req.session.message);
     res.render('sign-in', {
         submitUrl: options.homePath + 'login',
         message: req.session.message,
@@ -154,7 +155,7 @@ module.exports.signUp = function (req, res) {
 };
 
 module.exports.addUser = function (req, res) {
-    console.log(req.body);
+    // console.log(req.body);
     request({
         url: options.apiPath + 'getUserByEmail',
         method: 'GET',
@@ -164,16 +165,16 @@ module.exports.addUser = function (req, res) {
             console.error('find user error: ', findUserError);
         } else {
             if (findUserResponse.statusCode == 200) {
-                console.log('in user email: ', User, req.body.email);
+                // console.log('in user email: ', User, req.body.email);
                 if (!User) {
                     request({
                         url: options.apiPath + 'addUser',
                         method: "POST",
                         json: req.body
                     }, function (error, response, body) {
-                        console.log('---------------' + 1);
+                        // console.log('---------------' + 1);
                         if (response.statusCode == 201) {
-                            console.log(body);
+                            // console.log(body);
                             res.redirect(options.loginPath);
                         } else {
                             _showError(req, res, response.statusCode)
@@ -203,7 +204,7 @@ module.exports.login = function (req, res) {
             console.log('login find user Error: ', findUserError);
         } else {
             if (findUserResponse.statusCode == 200) {
-                console.log('in user email: ', User, req.body.email);
+                // console.log('in user email: ', User, req.body.email);
                 if (User) {
                     if (req.body.password == User.password) {
                         req.session.user = User;
@@ -212,11 +213,13 @@ module.exports.login = function (req, res) {
                         req.session.message = '账户或密码不正确';
                         res.redirect(options.homePath + 'sign-in');
                         req.session.message = null;
+                        console.log('req.session.message: ------------------------------', req.session.message);
                     }
                 } else {
                     req.session.message = '账户或密码不正确';
                     res.redirect(options.homePath + 'sign-in');
                     req.session.message = null;
+                    console.log('req.session.message: ------------------------------', req.session.message);
                 }
             } else {
                 console.error('findUserNot 200' + findUserResponse.statusCode);
@@ -241,7 +244,7 @@ module.exports.postDetail = function (req, res) {
     };
     request(requestOptions, function (error, response, body) {
         if (response.statusCode === 200) {
-            console.log('type = lost :::::::::::::::::::::::', body);
+            // console.log('type = lost :::::::::::::::::::::::', body);
             res.render('post-detail', {
                 post: body,
                 user: req.session.user
@@ -257,7 +260,35 @@ module.exports.postDetail = function (req, res) {
 };
 
 module.exports.profile = function (req, res) {
+    // console.log(req.session.user);
     res.render('profile', {
         user: req.session.user
     });
+};
+
+//评论
+module.exports.addComment = function (req, res) {
+    if (req.session.user) {
+        // console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@SSS', req.session.user._id);
+        // console.log('####################################################');
+        var requestOptions = {
+            url: options.apiPath + 'addComment',
+            method: "POST",
+            json: {
+                comment: req.body.comment,
+                postId: req.body.postId,
+                userId: req.session.user._id
+            }
+        };
+        request(requestOptions, function (error, response, body) {
+            res.status(response.statusCode);
+            res.json(body);
+        });
+    } else {
+        res.status(200);
+        res.json({
+            success: false,
+            isLogin: false,
+        });
+    }
 };
